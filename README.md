@@ -1,8 +1,8 @@
-###  DATE: 
+###  DATE: 05.03.2024
 
-###  NAME: 
-###  ROLL NO :
-###  DEPARTMENT: 
+###  NAME: NARESH KUMAR V
+###  ROLL NO : 212223040126
+###  DEPARTMENT: CSE
 
 
 # EXPERIMENT--04-INTERUPT-GENRATION-USING-SENSOR-AND-VISUALIZING-USING-SERIAL-MONITOR
@@ -119,14 +119,55 @@ The diagram below shows how the GPIO pins are connected to the 16 interrupt line
 
 ## STM 32 CUBE PROGRAM :
 
+````
+#include "main.h"
+#include "stdio.h"
+
+#if defined (_ICCARM) || defined (_ARMCC_VERSION)
+#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+#elif defined(_GNUC_)
+
+#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+#endif
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+		if(HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_4)==0)
+		{
+			printf("obstacle found\n");
+			HAL_Delay(500);
+		}
+		else
+		{
+			printf("obstacle not found\n");
+			HAL_Delay(500);
+		}
+}
+
+PUTCHAR_PROTOTYPE
+{
+
+  HAL_UART_Transmit(&huart2, (uint8_t *)&ch, 1, 0xFFFF);
+
+  return ch;
+}
+````
+
 
 
 ## Output screen shots of serial port utility   :
- 
+ ![310939546-97c5bbfa-1e57-45ae-9bd8-a6ed159c0085](https://github.com/NARESH-KUMAR-V/EXPERIMENT--04-INTERUPT-GENRATION-USING-SENSOR-AND-VISUALIZING-USING-SERIAL-MONITOR/assets/145842937/ecea70e1-70bb-47d3-b27a-fd75585dd971)
+
+ ![310939657-13d9af5f-d6bf-49df-8cb6-5f9151e2feaf](https://github.com/NARESH-KUMAR-V/EXPERIMENT--04-INTERUPT-GENRATION-USING-SENSOR-AND-VISUALIZING-USING-SERIAL-MONITOR/assets/145842937/01f62206-a80b-4cad-a450-4859bc419ce6)
+
+
  
  ## Circuit board :
  
- 
+ ![310939805-bee8cf59-8034-47b2-84fa-78af3f72f8f5](https://github.com/NARESH-KUMAR-V/EXPERIMENT--04-INTERUPT-GENRATION-USING-SENSOR-AND-VISUALIZING-USING-SERIAL-MONITOR/assets/145842937/c1ee96f2-5608-45cb-8e1f-452f9c255025)
+
+![310939872-5f075a15-4432-444e-a1ae-055961e762ea](https://github.com/NARESH-KUMAR-V/EXPERIMENT--04-INTERUPT-GENRATION-USING-SENSOR-AND-VISUALIZING-USING-SERIAL-MONITOR/assets/145842937/9d9b001d-97dd-4abe-8630-156c4a5ab376)
+
  
 ## Result :
 Interfacing a  IR SENSOR and interrupt is generated using external interrupt mode , visualized on serial port 
